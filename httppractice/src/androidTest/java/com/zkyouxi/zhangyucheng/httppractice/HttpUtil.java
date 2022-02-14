@@ -1,0 +1,167 @@
+package com.zkyouxi.zhangyucheng.httppractice;
+
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+public class HttpUtil {
+
+    private OkHttpClient okHttpClient;
+    private volatile static HttpUtil httpUtil;
+    private Request request;
+    private String mUrl;
+    private Call mCall;
+
+    private HttpCallBack mCallBack;
+    private RequestBody mRequestBody;
+    private String mediaTypeStr = "application/json; charset=utf-8";
+
+    private HttpUtil() {
+
+    }
+
+    public HttpUtil setCallBack(HttpCallBack callBack) {
+        mCallBack = callBack;
+        return httpUtil;
+    }
+
+    private void setMediaType(String mediaType) {
+        this.mediaTypeStr = mediaType;
+    }
+
+    private void setCall(Call call) {
+        mCall = call;
+    }
+
+    private void setmUrl(String mUrl) {
+        this.mUrl = mUrl;
+    }
+
+    private void setRequest(Request request) {
+        this.request = request;
+    }
+
+    public synchronized static HttpUtil getInstance() {
+        if (httpUtil == null) {
+            httpUtil = new HttpUtil();
+        }
+        return httpUtil;
+    }
+
+    //        String url ="";
+    public HttpUtil createUrl1(String url) throws Exception {
+        if (httpUtil == null) {
+            throw new Exception("请不要在 getInstance 之前调用 seturl");
+        }
+        httpUtil.setmUrl(url);
+        return this;
+    }
+
+
+    public HttpUtil createGetRequest2() throws Exception {
+        if (mUrl == null) {
+            throw new Exception("请不要在 setUrl 之前调用 createGetRequest");
+        }
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(mUrl)
+                .get()
+                .build();
+
+        httpUtil.setRequest(request);
+        return this;
+    }
+
+    public HttpUtil createMediaType(String mediaType) throws Exception {
+        this.setMediaType(mediaType);
+        return this;
+    }
+
+    public HttpUtil createCall3() throws Exception {
+        if (request == null) {
+            throw new Exception("请不要在 createGetRequest 之前调用 createCall");
+        }
+        if (okHttpClient == null) {
+            okHttpClient = new OkHttpClient();
+        }
+        final Call call = okHttpClient.newCall(request);
+        httpUtil.setCall(call);
+        return this;
+    }
+
+    /**
+     * 获取轮播图接口
+     * GET请求
+     */
+    public void doRequest4() {
+
+        //6.异步请求网络enqueue(Callback)
+        mCall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("HttpUtil", e.toString());
+                if (mCallBack != null) {
+                    mCallBack.onFail(e.toString());
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d("HttpUtil", "onResponse");
+                String json = Objects.requireNonNull(response.body()).string();// json real content
+                Log.d("HttpUtil", json);
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    if (mCallBack != null) {
+                        mCallBack.onSuccess(jsonObject);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * post请求
+     */
+
+
+    public HttpUtil setRequestParam(JSONObject jsonObject){
+        MediaType mType = null;
+        if(mediaTypeStr != null){
+            mType = MediaType.parse(mediaTypeStr);
+        }mRequestBody = RequestBody.create(mType,jsonObject.toString());
+        return this;
+    }
+
+
+    public HttpUtil createPostRequest() throws Exception {
+        if (mUrl == null) {
+            throw new Exception("请不要在 setUrl 之前调用 createPostRequest");
+        }
+        if (mRequestBody == null) {
+            throw new Exception("请不要在 setRequestBody 之前调用 createPostRequest");
+        }
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(mUrl)
+                .post(mRequestBody)
+                .build();
+
+        httpUtil.setRequest(request);
+        return this;
+    }
+}

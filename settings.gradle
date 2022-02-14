@@ -1,0 +1,11 @@
+rootProject.name = "zkyouxi_zyc"
+include ':app'
+include ':h5demo'
+include ':fragmentdemo'
+include ':newmodule'
+include ':proxytesting'
+include ':httppractice'
+include ':listviewdemo'
+include ':md5practice'
+include ':broadcasttesting'
+include ':myapplication'

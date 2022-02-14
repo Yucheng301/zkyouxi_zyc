@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/teal_200"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn1_1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="回传给H5" />
+
+
+        <TextView
+            android:id="@+id/tv_showmsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="调用Android显示结果"
+            android:textColor="#000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_webView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+    <!--    <WebView-->
+    <!--        android:id="@+id/wv_lilGame"-->
+    <!--        android:layout_width="fill_parent"-->
+    <!--        android:layout_height="fill_parent"-->
+    <!--        android:layout_marginTop="100dp"-->
+    <!--        android:background="@color/purple_500"/>-->
+</LinearLayout>

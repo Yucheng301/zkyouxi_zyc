@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+
 import org.json.JSONObject;
 
 import java.util.List;
@@ -70,16 +71,21 @@ public class MainActivity extends Activity {
                 String address = editText.getText().toString();
                 Log.d("HttpUtil", address);
                 try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("order_no", "akdlsfndsankfm;dlkaf");
-                    HttpUtil.getInstance().createUrl1("http://" + address + "/post").createMediaType("application/json; charset=utf-8").setRequestParam(jsonObject).createPostRequest().createCall3().setCallBack(new HttpCallBack() {
+                    long time1 = System.currentTimeMillis() / 1000;
+                    String jsonString = "{'game_id':12875493,'ogame_id':4642318, 'ad_id': 5312154, 'login_username':'zyc4513547', 'logging_password':'zyc1997112','reg_time': "+time1 +
+                            ", 'platform_os':5346, 'client_os':42214, 'client_id':'asdfsa23234ad4g1lkkos', 'client_ip':'asda23234ad4g1lkk2os', 'client_info':'googoo'}";
+                    JSONObject jsonObject = new JSONObject(jsonString);
+//                    JSONObject jsonObject = new JSONObject();
+//                    jsonObject.put("game_id", 12875493);
+                    HttpUtil.getInstance().createUrl1(address).createMediaType("application/json; charset=utf-8").setRequestParam(jsonObject).createPostRequest().createCall3().setCallBack(new HttpCallBack() {
                         @Override
                         public void onSuccess(JSONObject jsonObject) {
+
                             TextView lblTitle = (TextView) findViewById(R.id.textView);
                             lblTitle.setText(jsonObject.toString());
-                            PayInfo payInfo1 = new Gson().fromJson(jsonObject.toString(),PayInfo.class);
-                            payInfoDao3.insert(payInfo1);
-                            List<PayInfo> result2 = payInfoDao3.query();
+//                            PayInfo payInfo1 = new Gson().fromJson(jsonObject.toString(),PayInfo.class);
+//                            payInfoDao3.insert(payInfo1);
+//                            List<PayInfo> result2 = payInfoDao3.query();
                         }
 
                         @Override

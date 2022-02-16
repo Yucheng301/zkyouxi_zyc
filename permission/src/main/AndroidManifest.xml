@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.zkyouxi.permission">
+
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <application android:allowBackup="true"
+        android:supportsRtl="true">
+        <activity android:name="com.zkyouxi.permission.act.PermissionActivity" android:theme="@style/zk_lib_permission_Transparent"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
+
+    </application>
+
+</manifest>

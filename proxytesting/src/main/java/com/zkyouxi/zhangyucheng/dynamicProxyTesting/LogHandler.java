@@ -21,4 +21,6 @@ public class LogHandler implements InvocationHandler {
 
         return result;
     }
+
+
 }

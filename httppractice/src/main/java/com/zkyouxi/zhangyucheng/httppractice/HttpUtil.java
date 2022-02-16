@@ -1,5 +1,6 @@
 package com.zkyouxi.zhangyucheng.httppractice;
 
+import android.telecom.Call;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -8,13 +9,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Objects;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import zkyouxi.Callback;
+import zkyouxi.MediaType;
+import zkyouxi.OkHttpClient;
+import zkyouxi.Request;
+import zkyouxi.RequestBody;
+import zkyouxi.Response;
+
 
 public class HttpUtil {
 
@@ -22,7 +23,7 @@ public class HttpUtil {
     private volatile static HttpUtil httpUtil;
     private Request request;
     private String mUrl;
-    private Call mCall;
+    private zkyouxi.Call mCall;
 
     private HttpCallBack mCallBack;
     private RequestBody mRequestBody;
@@ -32,8 +33,8 @@ public class HttpUtil {
 
     }
 
-    public HttpUtil setCallBack(HttpCallBack callBack) {
-        mCallBack = callBack;
+    public HttpUtil setCallBack(HttpCallBack CallBack) {
+        mCallBack = CallBack;
         return httpUtil;
     }
 
@@ -41,8 +42,8 @@ public class HttpUtil {
         this.mediaTypeStr = mediaType;
     }
 
-    private void setCall(Call call) {
-        mCall = call;
+    private void setCall(zkyouxi.Call Call) {
+        mCall = Call;
     }
 
     private void setmUrl(String mUrl) {
@@ -95,8 +96,8 @@ public class HttpUtil {
         if (okHttpClient == null) {
             okHttpClient = new OkHttpClient();
         }
-        final Call call = okHttpClient.newCall(request);
-        httpUtil.setCall(call);
+        final zkyouxi.Call Call = okHttpClient.newCall(request);
+        httpUtil.setCall(Call);
         return this;
     }
 
@@ -109,7 +110,7 @@ public class HttpUtil {
         //6.异步请求网络enqueue(Callback)
         mCall.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(zkyouxi.Call Call, IOException e) {
                 Log.d("HttpUtil", e.toString());
                 if (mCallBack != null) {
                     mCallBack.onFail(e.toString());
@@ -117,7 +118,7 @@ public class HttpUtil {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(zkyouxi.Call Call, Response response) throws IOException {
                 Log.d("HttpUtil", "onResponse");
                 String json = Objects.requireNonNull(response.body()).string();// json real content
                 Log.d("HttpUtil", json);

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="zk_ysdk_permission_tip">为了您的游戏体验,请授予权限</string>
+    <string name="zk_ysdk_permission_tip_btn">同意</string>
+</resources>

@@ -31,4 +31,6 @@ android {
 dependencies {
 
 
+implementation files('..\\permission.jar')
+    implementation files('..\\zk_okhttp.jar')
 }

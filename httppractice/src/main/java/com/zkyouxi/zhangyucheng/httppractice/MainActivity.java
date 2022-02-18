@@ -7,14 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-
-import com.google.gson.Gson;
+import android.widget.Toast;
 
 
 import org.json.JSONObject;
 
-import java.util.List;
+
 
 
 public class MainActivity extends Activity {
@@ -34,7 +32,6 @@ public class MainActivity extends Activity {
 
         editText = (EditText) findViewById(R.id.edit_text);
         payInfoDao3 = new PayInfoDao3(this);
-
 
         SharedPreferences sp = getPreferences(Activity.MODE_PRIVATE);
         lanStored = sp.getString(LAN,"");
@@ -61,6 +58,7 @@ public class MainActivity extends Activity {
                     }).doRequest4();
                 } catch (Exception e) {
                     e.printStackTrace();
+
                 }
             }
         });
@@ -72,15 +70,17 @@ public class MainActivity extends Activity {
                 Log.d("HttpUtil", address);
                 try {
                     long time1 = System.currentTimeMillis() / 1000;
-                    String jsonString = "{'game_id':12875493,'ogame_id':4642318, 'ad_id': 5312154, 'login_username':'zyc4513547', 'logging_password':'zyc1997112','reg_time': "+time1 +
-                            ", 'platform_os':5346, 'client_os':42214, 'client_id':'asdfsa23234ad4g1lkkos', 'client_ip':'asda23234ad4g1lkk2os', 'client_info':'googoo'}";
+                    int b = (int)time1;
+//                    String s = String.valueOf(b);
+//                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                    String jsonString = "{'app_id':12875493, 'ad_id': 5312154, 'login_username':'zyc4513547', 'login_password':'zyc1997112','has_tips': '0', 'time': "+b +
+                            ", 'os':'android', 'extra':{'imei':'SDAKNSDKGALPWRT'}, 'sign':'asda23234ad4g1lkk2os'}";
                     JSONObject jsonObject = new JSONObject(jsonString);
 //                    JSONObject jsonObject = new JSONObject();
 //                    jsonObject.put("game_id", 12875493);
-                    HttpUtil.getInstance().createUrl1(address).createMediaType("application/json; charset=utf-8").setRequestParam(jsonObject).createPostRequest().createCall3().setCallBack(new HttpCallBack() {
+                    HttpUtil.getInstance().createUrl1(address).createMediaType("Content-Type: application/json; charset=utf-8").setRequestParam(jsonObject).createPostRequest().createCall3().setCallBack(new HttpCallBack() {
                         @Override
                         public void onSuccess(JSONObject jsonObject) {
-
                             TextView lblTitle = (TextView) findViewById(R.id.textView);
                             lblTitle.setText(jsonObject.toString());
 //                            PayInfo payInfo1 = new Gson().fromJson(jsonObject.toString(),PayInfo.class);
@@ -92,7 +92,6 @@ public class MainActivity extends Activity {
                         public void onFail(String msg) {
                             TextView lblTitle = (TextView) findViewById(R.id.textView);
                             lblTitle.setText("POST失败了bro");
-
                         }
                     }).doRequest4();
                 } catch (Exception e) {
@@ -100,8 +99,6 @@ public class MainActivity extends Activity {
                 }
             }
         });
-
-
     }
 
     @Override

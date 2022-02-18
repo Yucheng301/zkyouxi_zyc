@@ -20,5 +20,5 @@
         android:id="@+id/btn_getPermission"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="get permission"/>
+        android:text="open camera"/>
 </LinearLayout>

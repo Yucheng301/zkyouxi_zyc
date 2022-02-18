@@ -39,6 +39,8 @@ public final class Permission {
 
     public static final class Group {
         public static final int CALENDAR_CODE = 7777;
+
+
         public static final int CAMERA_CODE = 7778;
         public static final int CONTACTS_CODE = 7779;
         public static final int LOCATION_CODE = 7780;

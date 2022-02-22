@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
@@ -17,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.zkyouxi.zhangyucheng.uniqueid"
+
         minSdkVersion 16
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 26

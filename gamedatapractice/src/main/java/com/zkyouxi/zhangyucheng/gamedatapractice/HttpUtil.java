@@ -30,6 +30,10 @@ public class HttpUtil {
     private RequestBody mRequestBody;
     private String mediaTypeStr = "application/json; charset=utf-8";
 
+    public String getMediaTypeStr() {
+        return mediaTypeStr;
+    }
+
     private HttpUtil() {
 
     }

@@ -16,7 +16,6 @@ package com.zkyouxi.zhangyucheng.uniqueid;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 
@@ -26,11 +25,11 @@ import github.gzuliyujiang.oaid.DeviceID;
 import github.gzuliyujiang.oaid.DeviceIdentifier;
 import github.gzuliyujiang.oaid.IGetter;
 
-public class UniqueId {
-    public String uniqueID = null;
-    public String oaid = null;
+public class UniqueIdUtil {
+    private static String uniqueID = null;
+    private static String oaid = null;
 
-    public String getUniqueID(Context context){
+    public static String getUniqueID(Context context){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             IMEIUtil imeiUtil = new IMEIUtil();
             uniqueID = imeiUtil.getIMEI(context);
@@ -51,7 +50,7 @@ public class UniqueId {
 
     }
 
-    private void obtainDeviceId(Context context) {
+    private static void obtainDeviceId(Context context) {
 
         DeviceIdentifier.getOAID(context);
         DeviceID.getOAID(context, new IGetter() {

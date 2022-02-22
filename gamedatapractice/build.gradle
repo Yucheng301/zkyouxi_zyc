@@ -3,13 +3,24 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        config{
+            keyAlias 'zhangkun'
+            keyPassword 'zhangkun2017'
+            storeFile file('../keyStore/zhangkun_keystore.keystore')
+            storePassword 'zhangkun2017'
+        }
+
+    }
+
     compileSdkVersion 31
     buildToolsVersion "31.0.0"
 
     defaultConfig {
         applicationId "com.zkyouxi.zhangyucheng.gamedatapractice"
         minSdkVersion 16
-        targetSdkVersion 31
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -17,9 +28,16 @@ android {
     }
 
     buildTypes {
+        debug {
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -30,6 +48,8 @@ android {
 
 dependencies {
     implementation files('libs/zk_okhttp.jar')
+    implementation project(path: ':uniqueid')
     implementation 'com.squareup.okio:okio:2.4.3'
+
 
 }

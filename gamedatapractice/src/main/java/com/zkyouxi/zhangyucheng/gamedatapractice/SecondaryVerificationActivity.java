@@ -30,7 +30,7 @@ public class SecondaryVerificationActivity extends Activity {
     }
 
     public void postRequest() {
-        JSONObject jsonObject, extra;
+        JSONObject jsonObject;
         String address = "https://userapi.zkyouxi.com/token";
 
         try {
@@ -39,13 +39,13 @@ public class SecondaryVerificationActivity extends Activity {
             int time = (int) b;
 
             jsonObject = new JSONObject();
-            String sign = getSignature(12842, "4c62dc2f-e38e-459c-85c9-d723530e61f1", "base", time, "68933485-b422-47f5-90f6-ab714cd205d4");
+            String sign = getSignature(12842, "46ceacbd-7a10-4755-93c4-37b543b83d22", "base", time, "68933485-b422-47f5-90f6-ab714cd205d4");
             Log.d("signature", sign);
 
 
             try {
                 jsonObject.put("app_id", "12842");
-                jsonObject.put("authorize_code", "4c62dc2f-e38e-459c-85c9-d723530e61f1");
+                jsonObject.put("authorize_code", "46ceacbd-7a10-4755-93c4-37b543b83d22");
                 jsonObject.put("scope", "base");
                 jsonObject.put("sign", sign);
                 jsonObject.put("time", time);
@@ -80,7 +80,7 @@ public class SecondaryVerificationActivity extends Activity {
 
     private static String getSignature(int app_id, String authorize_code, String scope, int time, String secret_key) {
         String requestData =
-                "&app_id=" + app_id +
+                "app_id=" + app_id +
                         "&authorize_code=" + authorize_code +
                         "&scope=" + scope +
                         "&time=" + time;

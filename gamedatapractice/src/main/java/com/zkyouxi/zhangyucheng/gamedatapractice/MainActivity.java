@@ -1,20 +1,16 @@
 package com.zkyouxi.zhangyucheng.gamedatapractice;
 
-
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
 
-    Button btn_register, btn_login;
+    Button btn_register, btn_login, btn_secondVerification;
 
     /*SharePreference
     public static final String LAN = "address";
@@ -25,10 +21,9 @@ public class MainActivity extends Activity {
         //构造
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btn_login = findViewById(R.id.btn_login_activity);
 
-
-        btn_register = findViewById(R.id.login_button);
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -36,8 +31,7 @@ public class MainActivity extends Activity {
             }
         });
 
-
-        btn_register = findViewById(R.id.register_button);
+        btn_register = findViewById(R.id.btn_register_activity);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,8 +40,9 @@ public class MainActivity extends Activity {
             }
         });
 
-        btn_register = findViewById(R.id.secondaryVerificationActivity_button);
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        btn_secondVerification = findViewById(R.id.secondaryVerificationActivity_button);
+
+        btn_secondVerification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SecondaryVerificationActivity.class);
@@ -55,7 +50,6 @@ public class MainActivity extends Activity {
             }
         });
     }
-
 
 //    //SharePreference
 //    @Override
@@ -65,7 +59,5 @@ public class MainActivity extends Activity {
 //        super.onStop();
 //    }
 //
-
-
 }
 

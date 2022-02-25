@@ -21,8 +21,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         textView = findViewById(R.id.tv_activity);
         Button button = findViewById(R.id.left_fragment_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +43,8 @@ public class MainActivity extends Activity {
         beginFragmentTransaction.commit();
     }
 
-    public void getMessage(String msg){
+    public void getMessage(String msg) {
         textView.setText(msg);
+
     }
 }
